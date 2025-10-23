@@ -1,15 +1,17 @@
+namespace StatusBarKind {
+    export const sight = StatusBarKind.create()
+}
+statusbars.onStatusReached(StatusBarKind.sight, statusbars.StatusComparison.LT, statusbars.ComparisonType.Percentage, 100, function (status) {
+    no_sight_for_you = true
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    let no_sight_for_you = false
     if (no_sight_for_you == false) {
-        statusbar2.value += -10
+        statusbar2.value += -100
         color.setPalette(
         color.GrayScale
         )
         color.FadeToBlack.startScreenEffect()
     }
-})
-statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.LTE, statusbars.ComparisonType.Percentage, 100, function (status) {
-    stamana0 = false
 })
 controller.B.onEvent(ControllerButtonEvent.Repeated, function () {
     running = true
@@ -26,12 +28,19 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
     Render.moveWithController(1, 2, 1)
     running = false
 })
+statusbars.onStatusReached(StatusBarKind.sight, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
+    no_sight_for_you = false
+})
+statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.EQ, statusbars.ComparisonType.Percentage, 100, function (status) {
+    stamana0 = false
+})
 let B_presed = false
-let running = false
 let stamana0 = false
+let running = false
+let no_sight_for_you = false
 let statusbar: StatusBarSprite = null
 let statusbar2: StatusBarSprite = null
-statusbar2 = statusbars.create(8, 80, StatusBarKind.Health)
+statusbar2 = statusbars.create(8, 80, StatusBarKind.sight)
 statusbar = statusbars.create(80, 8, StatusBarKind.Health)
 let henry = sprites.create(img`
     . f f f f f f f f f f . 
@@ -240,7 +249,7 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
-tiles.placeOnTile(_, tiles.getTileLocation(28, 11))
+tiles.placeOnTile(_, tiles.getTileLocation(25, 5))
 color.setPalette(
 color.Black
 )
@@ -874,16 +883,9 @@ forever(function () {
     )
 })
 forever(function () {
-    if (stamana0 == false && running == false) {
-        B_presed = false
-        statusbar.value += 1
-        pause(50)
-    }
-    if (stamana0 == false && running == false) {
-        B_presed = false
-        statusbar.value += 1
-        pause(50)
-    }
+    statusbar2.value += 4
+    statusbar.value += 1
+    pause(50)
 })
 game.onUpdateInterval(100, function () {
     if (spriteutils.distanceBetween(mySprite, _) <= 100) {
