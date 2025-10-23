@@ -11,7 +11,9 @@
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
         "pxt-raycasting": "github:aqeeaqee/pxt-raycasting#v0.3.18",
-        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.3"
     },
     "files": [
         "main.blocks",
@@ -25,7 +27,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "2.0.59",
+        "target": "2.0.60",
         "targetId": "arcade"
     },
     "supportedTargets": [
