@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const orb = SpriteKind.create()
+}
 namespace StatusBarKind {
     export const sight = StatusBarKind.create()
 }
@@ -24,6 +27,11 @@ controller.B.onEvent(ControllerButtonEvent.Repeated, function () {
 statusbars.onZero(StatusBarKind.Health, function (status) {
     stamana0 = true
 })
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    color.startFadeFromCurrent(color.White)
+    pause(2000)
+    game.gameOver(false)
+})
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     Render.moveWithController(1, 2, 1)
     running = false
@@ -42,6 +50,96 @@ let statusbar: StatusBarSprite = null
 let statusbar2: StatusBarSprite = null
 statusbar2 = statusbars.create(8, 80, StatusBarKind.sight)
 statusbar = statusbars.create(80, 8, StatusBarKind.Health)
+let mySprite2 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . c c c c c c c c . . . . 
+    . . . c c c c c c c c c c . . . 
+    . . c c c c c c c c c c c c . . 
+    . c c c c c c c c c c c c c c . 
+    . c c c c c c a a c c c c c c . 
+    . c c c c c a a a a c c c c c . 
+    . c c c c a a a a a a c c c c . 
+    . c c c c a a a a a a c c c c . 
+    . c c c c c a a a a c c c c c . 
+    . c c c c c c a a c c c c c c . 
+    . c c c c c c c c c c c c c c . 
+    . . c c c c c c c c c c c c . . 
+    . . . c c c c c c c c c c . . . 
+    . . . . c c c c c c c c . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.orb)
+let mySprite3 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . 5 5 5 5 5 5 5 5 . . . . 
+    . . . 5 5 5 5 5 5 5 5 5 5 . . . 
+    . . 5 5 5 5 5 5 5 5 5 5 5 5 . . 
+    . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
+    . 5 5 5 5 5 5 2 2 5 5 5 5 5 5 . 
+    . 5 5 5 5 5 2 2 2 2 5 5 5 5 5 . 
+    . 5 5 5 5 2 2 2 2 2 2 5 5 5 5 . 
+    . 5 5 5 5 2 2 2 2 2 2 5 5 5 5 . 
+    . 5 5 5 5 5 2 2 2 2 5 5 5 5 5 . 
+    . 5 5 5 5 5 5 2 2 5 5 5 5 5 5 . 
+    . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
+    . . 5 5 5 5 5 5 5 5 5 5 5 5 . . 
+    . . . 5 5 5 5 5 5 5 5 5 5 . . . 
+    . . . . 5 5 5 5 5 5 5 5 . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.orb)
+let mySprite4 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . 7 7 7 7 7 7 7 7 . . . . 
+    . . . 7 7 7 7 7 7 7 7 7 7 . . . 
+    . . 7 7 7 7 7 7 7 7 7 7 7 7 . . 
+    . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . 
+    . 7 7 7 7 7 7 e e 7 7 7 7 7 7 . 
+    . 7 7 7 7 7 e e e e 7 7 7 7 7 . 
+    . 7 7 7 7 e e e e e e 7 7 7 7 . 
+    . 7 7 7 7 e e e e e e 7 7 7 7 . 
+    . 7 7 7 7 7 e e e e 7 7 7 7 7 . 
+    . 7 7 7 7 7 7 e e 7 7 7 7 7 7 . 
+    . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . 
+    . . 7 7 7 7 7 7 7 7 7 7 7 7 . . 
+    . . . 7 7 7 7 7 7 7 7 7 7 . . . 
+    . . . . 7 7 7 7 7 7 7 7 . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.orb)
+let mySprite5 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . 8 8 8 8 8 8 8 8 . . . . 
+    . . . 8 8 8 8 8 8 8 8 8 8 . . . 
+    . . 8 8 8 8 8 8 8 8 8 8 8 8 . . 
+    . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
+    . 8 8 8 8 8 8 9 9 8 8 8 8 8 8 . 
+    . 8 8 8 8 8 9 9 9 9 8 8 8 8 8 . 
+    . 8 8 8 8 9 9 9 9 9 9 8 8 8 8 . 
+    . 8 8 8 8 9 9 9 9 9 9 8 8 8 8 . 
+    . 8 8 8 8 8 9 9 9 9 8 8 8 8 8 . 
+    . 8 8 8 8 8 8 9 9 8 8 8 8 8 8 . 
+    . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
+    . . 8 8 8 8 8 8 8 8 8 8 8 8 . . 
+    . . . 8 8 8 8 8 8 8 8 8 8 . . . 
+    . . . . 8 8 8 8 8 8 8 8 . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.orb)
+let mySprite6 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . 3 3 3 3 3 3 3 3 . . . . 
+    . . . 3 3 3 3 3 3 3 3 3 3 . . . 
+    . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
+    . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . 
+    . 3 3 3 3 3 3 d d 3 3 3 3 3 3 . 
+    . 3 3 3 3 3 d d d d 3 3 3 3 3 . 
+    . 3 3 3 3 d d d d d d 3 3 3 3 . 
+    . 3 3 3 3 d d d d d d 3 3 3 3 . 
+    . 3 3 3 3 3 d d d d 3 3 3 3 3 . 
+    . 3 3 3 3 3 3 d d 3 3 3 3 3 3 . 
+    . 3 3 3 3 3 3 3 3 3 3 3 3 3 3 . 
+    . . 3 3 3 3 3 3 3 3 3 3 3 3 . . 
+    . . . 3 3 3 3 3 3 3 3 3 3 . . . 
+    . . . . 3 3 3 3 3 3 3 3 . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.orb)
 let henry = sprites.create(img`
     . f f f f f f f f f f . 
     f 7 7 7 7 7 7 7 7 7 7 f 
@@ -77,7 +175,7 @@ let _ = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
+    `, SpriteKind.Enemy)
 let mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -249,13 +347,15 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
-tiles.placeOnTile(_, tiles.getTileLocation(25, 5))
+tiles.placeOnTile(_, tiles.getTileLocation(14, 4))
 color.setPalette(
 color.Black
 )
 statusbar2.setColor(5, 8)
 statusbar2.positionDirection(CollisionDirection.Left)
 statusbar2.value = 100
+let collected = 0
+game.setGameOverEffect(false, effects.none)
 forever(function () {
     characterAnimations.loopFrames(
     _,
@@ -883,12 +983,12 @@ forever(function () {
     )
 })
 forever(function () {
-    statusbar2.value += 4
+    statusbar2.value += 3.5
     statusbar.value += 1
     pause(50)
 })
 game.onUpdateInterval(100, function () {
-    if (spriteutils.distanceBetween(mySprite, _) <= 100) {
+    if (spriteutils.distanceBetween(mySprite, _) <= 180) {
         _.follow(mySprite, 7)
     } else {
         _.follow(mySprite, 0)
