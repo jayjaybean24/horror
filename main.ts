@@ -5,6 +5,9 @@ namespace SpriteKind {
 namespace StatusBarKind {
     export const sight = StatusBarKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
+    tiles.placeOnTile(_, tiles.getTileLocation(22, 25))
+})
 statusbars.onStatusReached(StatusBarKind.sight, statusbars.StatusComparison.LT, statusbars.ComparisonType.Percentage, 100, function (status) {
     no_sight_for_you = true
 })
@@ -12,9 +15,27 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (no_sight_for_you == false) {
         statusbar2.value += -100
         color.setPalette(
+        color.White
+        )
+        pause(100)
+        color.setPalette(
         color.GrayScale
         )
         color.FadeToBlack.startScreenEffect()
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    tiles.placeOnTile(_, tiles.getTileLocation(12, 20))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    color.startFadeFromCurrent(color.White)
+    pause(2000)
+    game.gameOver(true)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.orb, function (sprite, otherSprite) {
+    if (GET_OUT_WHILE_YOU_STILL_CAN == false) {
+        tiles.placeOnRandomTile(mySprite2, assets.tile`myTile1`)
+        collected += 1
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Repeated, function () {
@@ -35,7 +56,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
         ..................11
         .88.888.8....888.11.
         .................12.
-        .818.............1..
+        .818............11..
         .8119.........111...
         ..911.........1.....
         ....11.......11.....
@@ -49,32 +70,35 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
         55551...............
         ..111...............
         `,img`
-        ..................bb
-        .88.888.8....888.bb.
-        .................b..
-        .8b8............bb..
-        .8bb9.........bbb...
-        ..9bb.........b.....
-        ....bb.......bb.....
-        .....bbb.8.bbb......
-        ......bbb88.b.......
-        ........bbbbbb......
-        ........b....bb.....
-        .......bb.....bbb...
-        ......b.........b...
-        555.bbb..........b..
-        555.b...............
-        ..bbb...............
+        ..................11
+        .88.888.8....888.11.
+        .................1..
+        .818............11..
+        .8119.........111...
+        ..911.........1.....
+        ....11.......11.....
+        .....111.8.111......
+        ......11188.1.......
+        ........111111......
+        ........1....11.....
+        .......11.....111...
+        ......1.........1...
+        555.111..........1..
+        555.1...............
+        ..111...............
         `],
     500,
-    false
+    true
     )
     color.setPalette(
     color.GrayScale
     )
     color.startFadeFromCurrent(color.White)
-    pause(2000)
+    color.pauseUntilFadeDone()
     game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
+    tiles.placeOnTile(_, tiles.getTileLocation(14, 4))
 })
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     Render.moveWithController(1, 2, 1)
@@ -86,11 +110,13 @@ statusbars.onStatusReached(StatusBarKind.sight, statusbars.StatusComparison.GT, 
 statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.EQ, statusbars.ComparisonType.Percentage, 100, function (status) {
     stamana0 = false
 })
-let GET_OUT_WHILE_YOU_STILL_CAN = false
 let B_presed = false
 let stamana0 = false
 let running = false
+let GET_OUT_WHILE_YOU_STILL_CAN = false
 let no_sight_for_you = false
+let _: Sprite = null
+let mySprite2: Sprite = null
 let statusbar: StatusBarSprite = null
 let statusbar2: StatusBarSprite = null
 let screen2: Sprite = null
@@ -114,7 +140,7 @@ screen2 = sprites.create(img`
     `, SpriteKind.screen)
 statusbar2 = statusbars.create(8, 40, StatusBarKind.sight)
 statusbar = statusbars.create(40, 8, StatusBarKind.Health)
-let mySprite2 = sprites.create(img`
+mySprite2 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . 5 5 5 5 5 5 5 5 . . . . 
     . . . 5 5 5 5 5 5 5 5 5 5 . . . 
@@ -222,7 +248,7 @@ let henry = sprites.create(img`
     . f f 7 f . . f 7 f f . 
     . f 7 7 f . . f 7 7 f . 
     `, SpriteKind.Player)
-let _ = sprites.create(img`
+_ = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -420,6 +446,7 @@ statusbar2.positionDirection(CollisionDirection.Left)
 statusbar2.value = 100
 let collected = 0
 game.setGameOverEffect(false, effects.none)
+game.setGameOverEffect(true, effects.none)
 screen2.setFlag(SpriteFlag.RelativeToCamera, true)
 animation.runImageAnimation(
 screen2,
@@ -1122,6 +1149,7 @@ game.onUpdateInterval(100, function () {
         500,
         false
         )
+        tiles.setTileAt(tiles.getTileLocation(22, 28), assets.tile`myTile3`)
     }
 })
 game.onUpdateInterval(100, function () {
