@@ -11,8 +11,21 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, l
 statusbars.onStatusReached(StatusBarKind.sight, statusbars.StatusComparison.LT, statusbars.ComparisonType.Percentage, 100, function (status) {
     no_sight_for_you = true
 })
+browserEvents.Four.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        mySprite.setFlag(SpriteFlag.GhostThroughWalls, true)
+    }
+})
+browserEvents.Six.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        Render.toggleViewMode()
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
+    game.gameOver(true)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (no_sight_for_you == false) {
+    if (no_sight_for_you == false && hahah == false) {
         statusbar2.value += -100
         color.setPalette(
         color.White
@@ -27,15 +40,16 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     tiles.placeOnTile(_, tiles.getTileLocation(12, 20))
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    color.startFadeFromCurrent(color.White)
-    pause(2000)
-    game.gameOver(true)
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.orb, function (sprite, otherSprite) {
     if (GET_OUT_WHILE_YOU_STILL_CAN == false) {
         tiles.placeOnRandomTile(mySprite2, assets.tile`myTile1`)
         collected += 1
+    }
+})
+browserEvents.Three.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        Render.moveWithController(10, 2, 1)
+        mySprite.setFlag(SpriteFlag.GhostThroughSprites, true)
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Repeated, function () {
@@ -54,14 +68,14 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     screen2,
     [img`
         ..................11
-        .88.888.8....888.11.
+        .99.999.9....999.11.
         .................12.
-        .818............11..
-        .8119.........111...
-        ..911.........1.....
+        .919............11..
+        .9118.........111...
+        ..811.........1.....
         ....11.......11.....
-        .....111.8.111......
-        ......11188.1.......
+        .....111.9.111......
+        ......11199.1.......
         ........111111......
         ........1....11.....
         .......11.....111...
@@ -71,14 +85,14 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
         ..111...............
         `,img`
         ..................11
-        .88.888.8....888.11.
+        .99.999.9....999.11.
         .................1..
-        .818............11..
-        .8119.........111...
-        ..911.........1.....
+        .919............11..
+        .9118.........111...
+        ..811.........1.....
         ....11.......11.....
-        .....111.8.111......
-        ......11188.1.......
+        .....111.9.111......
+        ......11199.1.......
         ........111111......
         ........1....11.....
         .......11.....111...
@@ -97,8 +111,46 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     color.pauseUntilFadeDone()
     game.gameOver(false)
 })
+browserEvents.Zero.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    color.setPalette(
+    color.SteamPunk
+    )
+    if (game.askForNumber("ENTER PASSWORD") == 201124) {
+        admin = true
+        color.setPalette(
+        color.GrayScale
+        )
+    }
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile8`, function (sprite, location) {
     tiles.placeOnTile(_, tiles.getTileLocation(14, 4))
+})
+browserEvents.Seven.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        animation.runImageAnimation(
+        screen2,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        500,
+        false
+        )
+    }
 })
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     Render.moveWithController(1, 2, 1)
@@ -107,14 +159,44 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
 statusbars.onStatusReached(StatusBarKind.sight, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
     no_sight_for_you = false
 })
+browserEvents.Two.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        collected = 5
+        tiles.setWallAt(tiles.getTileLocation(22, 29), false)
+        tiles.setTileAt(tiles.getTileLocation(22, 30), assets.tile`myTile11`)
+        tiles.setTileAt(tiles.getTileLocation(22, 29), assets.tile`myTile7`)
+    }
+})
+browserEvents.One.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        color.setPalette(
+        color.originalPalette
+        )
+    }
+})
 statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.EQ, statusbars.ComparisonType.Percentage, 100, function (status) {
     stamana0 = false
+})
+browserEvents.Five.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    if (admin == true) {
+        mySprite.setFlag(SpriteFlag.GhostThroughWalls, false)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
+    hahah = true
+    collected = 0
+    tiles.setTileAt(tiles.getTileLocation(22, 30), assets.tile`myTile7`)
+    tiles.setWallAt(tiles.getTileLocation(22, 29), true)
 })
 let B_presed = false
 let stamana0 = false
 let running = false
 let GET_OUT_WHILE_YOU_STILL_CAN = false
+let hahah = false
+let admin = false
 let no_sight_for_you = false
+let collected = 0
+let mySprite: Sprite = null
 let _: Sprite = null
 let mySprite2: Sprite = null
 let statusbar: StatusBarSprite = null
@@ -266,7 +348,7 @@ _ = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Enemy)
-let mySprite = sprites.create(img`
+mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -444,7 +526,7 @@ color.Black
 statusbar2.setColor(5, 8)
 statusbar2.positionDirection(CollisionDirection.Left)
 statusbar2.value = 100
-let collected = 0
+collected = 0
 game.setGameOverEffect(false, effects.none)
 game.setGameOverEffect(true, effects.none)
 screen2.setFlag(SpriteFlag.RelativeToCamera, true)
@@ -452,15 +534,15 @@ animation.runImageAnimation(
 screen2,
 [img`
     ....................
-    .88.888.8....888.22.
+    .99.999.9....999.22.
     .................22.
-    .888................
-    .8889...............
-    ..999...............
+    .999................
+    .9998...............
+    ..888...............
     ....................
-    .........8..........
-    ........888.........
-    .........8..........
+    .........9..........
+    ........999.........
+    .........9..........
     ....................
     ....................
     ....................
@@ -469,15 +551,15 @@ screen2,
     ....................
     `,img`
     ....................
-    .88.888.8....888....
+    .99.999.9....999....
     ....................
-    .888................
-    .8889...............
-    ..999...............
+    .999................
+    .9998...............
+    ..888...............
     ....................
-    .........8..........
-    ........888.........
-    .........8..........
+    .........9..........
+    ........999.........
+    .........9..........
     ....................
     ....................
     ....................
@@ -1125,7 +1207,6 @@ forever(function () {
 game.onUpdateInterval(100, function () {
     if (collected == 5) {
         GET_OUT_WHILE_YOU_STILL_CAN = true
-        info.startCountdown(180)
         animation.runImageAnimation(
         mySprite2,
         [img`
@@ -1149,7 +1230,9 @@ game.onUpdateInterval(100, function () {
         500,
         false
         )
-        tiles.setTileAt(tiles.getTileLocation(22, 28), assets.tile`myTile3`)
+        tiles.setWallAt(tiles.getTileLocation(22, 29), false)
+        tiles.setTileAt(tiles.getTileLocation(22, 29), assets.tile`myTile7`)
+        tiles.setTileAt(tiles.getTileLocation(22, 30), assets.tile`myTile11`)
     }
 })
 game.onUpdateInterval(100, function () {
