@@ -1,4 +1,4 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v2.0.61/---simulator","cdnUrl":"https://cdn.makecode.com","version":"0.0.1","target":"arcade","targetVersion":"2.0.61","repo":"jayjaybean24/horror"}
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v2.0.61/---simulator","cdnUrl":"https://cdn.makecode.com","version":"0.0.2","target":"arcade","targetVersion":"2.0.61","repo":"jayjaybean24/horror"}
 // total=3319884 new=23.09% cached=72.47% other=4.44%
 (function (ectx) {
 'use strict';
@@ -767,7 +767,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P49056(s) {
+function _main___P49135(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -2773,13 +2773,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P49056.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"pxt_modules/Timers/main.ts","functionName":"<main>","argumentNames":[]}
-_main___P49056.continuations = [ 77,78,79,80 ]
+_main___P49135.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"pxt_modules/Timers/main.ts","functionName":"<main>","argumentNames":[]}
+_main___P49135.continuations = [ 77,78,79,80 ]
 
-function _main___P49056_mk(s) {
+function _main___P49135_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P49056, depth: s.depth + 1,
+        parent: s, fn: _main___P49135, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -94602,5 +94602,5 @@ const effects_SceneAnchor__C6283_VT = mkVTable({
 
 const breakpoints = setupDebugger(1, ["transparency16___5410","tile1___5411","tile4___5412","tile6___5413","tile7___5414","tile9___5415","tile3___5418","tile2___5416","tile10___5420","tile11___5421","tile12___5422","tile14___5424","tile15___5425","tile16___5426","tile17___5427","tile18___5428","tile5___5417","tile8___5419","tile13___5423","orb___47960","screen___47963","gun___47966","boss___47969","BossProjectile___47972","nothing___47975","sight___47978","PlayerHealth___47981","____47992","oh_yeah_its_gun_time___48001","gun___48005","GET_OUT_WHILE_YOU_STILL_CAN___48022","boss_fight___48025","no_sight_for_you___48034","admin___48042","mySprite___48046","statusbar2___48109","projectile___48127","projectile2___48161","statusbar4___48168","mySprite2___48181","collected___48187","running___48206","stamana0___48211","B_presed___48217","statusbar___48224","screen2___48267","one_shot___48286","last_life___48322","statusbar3___48382","hahah___48531","mySprite3___48564","mySprite4___48570","mySprite5___48576","mySprite6___48582","henry___48588","boby___48541"])
 
-return _main___P49056
+return _main___P49135
 })
